@@ -1,0 +1,34 @@
+---
+layout: page
+title: Gallery
+eyebrow: Moments
+lead: Photos from our gatherings and celebrations.
+permalink: /gallery/
+---
+{% assign albums = site.data.gallery.albums %}
+{% assign photo_count = 0 %}
+{% for album in albums %}{% if album.photos %}{% assign photo_count = photo_count | plus: album.photos.size %}{% endif %}{% endfor %}
+
+{% if photo_count > 0 %}
+  {% for album in albums %}
+    {% if album.photos and album.photos.size > 0 %}
+      <section class="album">
+        <div class="album-head">
+          <h2>{{ album.title }}</h2>
+          {% if album.date and album.date != "" %}<p class="album-date">{{ album.date | date: "%B %-d, %Y" }}</p>{% endif %}
+          {% if album.description and album.description != "" %}<p class="muted">{{ album.description }}</p>{% endif %}
+        </div>
+        <div class="gallery-grid">
+          {% for photo in album.photos %}
+            {% include gallery-item.html photo=photo album=album.title %}
+          {% endfor %}
+        </div>
+      </section>
+    {% endif %}
+  {% endfor %}
+{% else %}
+  <div class="empty-state">
+    <h2>Photos coming soon.</h2>
+    <p>Pictures from our events will be shared here.</p>
+  </div>
+{% endif %}

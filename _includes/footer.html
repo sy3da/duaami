@@ -1,0 +1,35 @@
+{% assign settings = site.data.settings %}
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-about">
+      <img src="{{ '/assets/images/logo-256.jpg' | relative_url }}" alt="DUAA Michigan logo" width="72" height="70">
+      <p><strong>{{ site.title }}</strong></p>
+      <p class="muted">Connecting University of Dhaka graduates across Michigan.</p>
+    </div>
+    <div>
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="{{ '/events/' | relative_url }}">Events</a></li>
+        <li><a href="{{ '/news/' | relative_url }}">News</a></li>
+        <li><a href="{{ '/gallery/' | relative_url }}">Gallery</a></li>
+        <li><a href="{{ '/board/' | relative_url }}">Board Members</a></li>
+        <li><a href="{{ '/members/' | relative_url }}">Members</a></li>
+        <li><a href="{{ '/membership/' | relative_url }}">Membership</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <ul>
+        {% if settings.email and settings.email != "" %}<li><a href="mailto:{{ settings.email }}">{{ settings.email }}</a></li>{% endif %}
+        {% if settings.phone and settings.phone != "" %}<li><a href="tel:{{ settings.phone | remove: ' ' | remove: '-' }}">{{ settings.phone }}</a></li>{% endif %}
+        {% if settings.facebook and settings.facebook != "" %}<li><a href="{{ settings.facebook }}" target="_blank" rel="noopener">Facebook</a></li>{% endif %}
+        <li>Michigan, USA</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">
+      &copy; {{ site.time | date: "%Y" }} {{ site.title }}. All rights reserved.
+    </div>
+  </div>
+</footer>

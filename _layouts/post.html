@@ -1,0 +1,14 @@
+---
+layout: default
+---
+{% capture post_date %}{{ page.date | date: "%B %-d, %Y" }}{% endcapture %}
+{% include page-header.html title=page.title eyebrow="News" lead=post_date %}
+<section class="section">
+  <article class="container narrow prose">
+    {% if page.image and page.image != "" %}
+      <img class="cover" src="{{ page.image | relative_url }}" alt="">
+    {% endif %}
+    {{ content }}
+    <p class="back-link"><a href="{{ '/news/' | relative_url }}">&larr; All news</a></p>
+  </article>
+</section>

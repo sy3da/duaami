@@ -1,0 +1,79 @@
+---
+layout: page
+title: Membership
+eyebrow: Join us
+lead: Become part of the Dhaka University alumni community in Michigan.
+permalink: /membership/
+---
+{% assign settings = site.data.settings %}
+<div class="membership-grid">
+  <aside class="membership-info">
+    <h2>Who can join?</h2>
+    <p>{{ settings.membership_note }}</p>
+    <ul class="check-list">
+      <li>Graduates of any faculty, department or institute of the University of Dhaka</li>
+      <li>Living, working or studying in Michigan</li>
+      <li>Undergraduate, graduate and doctoral alumni are all welcome</li>
+    </ul>
+    {% if settings.membership_fee and settings.membership_fee != "" %}
+      <h3>Membership fee</h3>
+      <p>{{ settings.membership_fee }}</p>
+    {% endif %}
+    <h3>What members get</h3>
+    <ul class="check-list">
+      <li>Invitations to chapter events and reunions</li>
+      <li>A listing in the members directory (optional)</li>
+      <li>A network of fellow alumni across Michigan</li>
+    </ul>
+    {% if settings.email and settings.email != "" %}
+      <p class="muted">Questions? Email <a href="mailto:{{ settings.email }}">{{ settings.email }}</a>.</p>
+    {% endif %}
+  </aside>
+
+  <div class="card form-card">
+    <h2>Membership Enrollment</h2>
+    {% if settings.membership_form_endpoint and settings.membership_form_endpoint != "" %}
+      {% assign form_ready = true %}
+    {% endif %}
+    {% unless form_ready %}
+      <p class="notice">Online enrollment is being set up. In the meantime, please email {% if settings.email and settings.email != "" %}<a href="mailto:{{ settings.email }}">{{ settings.email }}</a>{% else %}us{% endif %} to join.</p>
+    {% endunless %}
+    <form class="enroll-form" action="{{ settings.membership_form_endpoint }}" method="POST" data-enroll-form>
+      <input type="hidden" name="_subject" value="New DUAA Michigan membership application">
+      <input type="text" name="_gotcha" class="visually-hidden" tabindex="-1" autocomplete="off">
+
+      <fieldset>
+        <legend>About you</legend>
+        <div class="field-row">
+          <label>Full name *<input type="text" name="name" required autocomplete="name"></label>
+          <label>Email *<input type="email" name="email" required autocomplete="email"></label>
+        </div>
+        <div class="field-row">
+          <label>Phone<input type="tel" name="phone" autocomplete="tel"></label>
+          <label>City in Michigan *<input type="text" name="city" required autocomplete="address-level2"></label>
+        </div>
+        <label>Current profession / employer<input type="text" name="profession"></label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Your time at Dhaka University</legend>
+        <div class="field-row">
+          <label>Department / Institute *<input type="text" name="department" required></label>
+          <label>Session / Batch *<input type="text" name="session" placeholder="e.g. 1998–99" required></label>
+        </div>
+        <div class="field-row">
+          <label>Degree(s) earned *<input type="text" name="degree" placeholder="e.g. BSc, MSc" required></label>
+          <label>Hall<input type="text" name="hall" placeholder="e.g. Salimullah Muslim Hall"></label>
+        </div>
+      </fieldset>
+
+      <label>Anything else you'd like to share?<textarea name="message" rows="4"></textarea></label>
+
+      <label class="checkbox"><input type="checkbox" name="list_in_directory" value="yes" checked> List me in the public members directory (name, department, session, hall and city only)</label>
+      <label class="checkbox"><input type="checkbox" name="confirm_graduate" value="yes" required> I confirm I am a graduate of the University of Dhaka *</label>
+
+      <button class="btn btn-gold" type="submit"{% unless form_ready %} disabled{% endunless %}>Submit Application</button>
+      <p class="form-status" role="status" data-form-status></p>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+---
+layout: page
+title: News
+eyebrow: Updates
+lead: Announcements and stories from the chapter.
+permalink: /news/
+---
+{% if site.posts.size > 0 %}
+  <div class="news-grid">
+    {% for p in site.posts %}
+      {% include news-card.html post=p %}
+    {% endfor %}
+  </div>
+{% else %}
+  <p class="empty">No news yet.</p>
+{% endif %}

@@ -1,0 +1,16 @@
+members:
+  - name: Professor Dr. Ahsan Habib
+    role: President
+    profession: Economist and educator
+    bio: Former administrator at Adrian College, Michigan.
+  - name: Iqbal Faiz Sapon
+    role: Vice President
+    profession: Histologist
+  - name: Saria Sadiq
+    role: General Secretary
+    profession: Biochemist
+  - name: Mohammad Matin
+    role: Joint General Secretary
+    profession: Pharmacist
+  - name: Faisal Ahmed
+    role: Treasurer

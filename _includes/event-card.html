@@ -1,0 +1,17 @@
+{% assign e = include.event %}
+<article class="card event-card" data-event-date="{{ e.end_date | default: e.date | date: '%Y-%m-%d' }}">
+  <div class="event-date">
+    <span class="month">{{ e.date | date: "%b" }}</span>
+    <span class="day">{{ e.date | date: "%-d" }}</span>
+    <span class="year">{{ e.date | date: "%Y" }}</span>
+  </div>
+  <div class="event-body">
+    <h3><a href="{{ e.url | relative_url }}">{{ e.title }}</a></h3>
+    <p class="event-meta">
+      {% if e.time and e.time != "" %}<span>{{ e.time }}</span>{% endif %}
+      <span>{{ e.location }}</span>
+    </p>
+    <p>{{ e.summary }}</p>
+    <a class="text-link" href="{{ e.url | relative_url }}">Event details &rarr;</a>
+  </div>
+</article>

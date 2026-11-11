@@ -1,0 +1,5 @@
+{% assign photo = include.photo %}
+<a class="gallery-item" href="{{ photo.image | relative_url }}" data-lightbox data-caption="{{ photo.caption | default: include.album | escape }}">
+  <img src="{{ photo.image | relative_url }}" alt="{{ photo.caption | default: include.album | escape }}" loading="lazy">
+  {% if photo.caption and photo.caption != "" %}<span class="gallery-caption">{{ photo.caption }}</span>{% endif %}
+</a>

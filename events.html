@@ -1,0 +1,36 @@
+---
+layout: page
+title: Events
+eyebrow: Calendar
+lead: Gatherings, celebrations and meetups for DU alumni across Michigan.
+permalink: /events/
+---
+{% assign today = site.time | date: "%Y-%m-%d" %}
+{% assign events = site.events | sort: "date" %}
+
+<h2 class="list-title">Upcoming</h2>
+{% assign upcoming_count = 0 %}
+<div class="event-list" data-upcoming-list>
+  {% for e in events %}
+    {% assign last_day = e.end_date | default: e.date | date: "%Y-%m-%d" %}
+    {% if last_day >= today %}
+      {% include event-card.html event=e %}
+      {% assign upcoming_count = upcoming_count | plus: 1 %}
+    {% endif %}
+  {% endfor %}
+</div>
+<p class="empty"{% if upcoming_count > 0 %} hidden{% endif %} data-upcoming-empty>No upcoming events right now — check back soon.</p>
+
+{% assign past_count = events.size | minus: upcoming_count %}
+<div class="past-events" data-past-section{% if past_count == 0 %} hidden{% endif %}>
+  <h2 class="list-title">Past Events</h2>
+  <div class="event-list past" data-past-list>
+    {% assign past_events = events | reverse %}
+    {% for e in past_events %}
+      {% assign last_day = e.end_date | default: e.date | date: "%Y-%m-%d" %}
+      {% if last_day < today %}
+        {% include event-card.html event=e %}
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>

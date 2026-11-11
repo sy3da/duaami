@@ -1,0 +1,213 @@
+media:
+  input: assets/images
+  output: /assets/images
+
+content:
+  - name: events
+    label: Events
+    type: collection
+    path: _events
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view:
+      fields: [title, date, location]
+      sort: [date]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: date
+        label: Event date
+        type: date
+        required: true
+      - name: end_date
+        label: End date (multi-day events only)
+        type: date
+      - name: time
+        label: Time
+        type: string
+        description: "e.g. 2:00 PM – 6:00 PM"
+      - name: location
+        label: Location
+        type: string
+        required: true
+      - name: summary
+        label: Short summary
+        type: text
+        required: true
+      - name: image
+        label: Cover image
+        type: image
+      - name: rsvp_url
+        label: RSVP / registration link
+        type: string
+      - name: body
+        label: Details
+        type: rich-text
+
+  - name: news
+    label: News
+    type: collection
+    path: _posts
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view:
+      fields: [title, date]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: date
+        label: Publish date
+        type: date
+        required: true
+      - name: summary
+        label: Short summary
+        type: text
+        required: true
+      - name: image
+        label: Cover image
+        type: image
+      - name: body
+        label: Article
+        type: rich-text
+
+  - name: board
+    label: Board Members
+    type: file
+    path: _data/board.yml
+    fields:
+      - name: members
+        label: Board members
+        type: object
+        list: true
+        fields:
+          - name: name
+            label: Name
+            type: string
+            required: true
+          - name: role
+            label: Position
+            type: string
+            required: true
+          - name: photo
+            label: Photo
+            type: image
+          - name: department
+            label: DU department
+            type: string
+          - name: session
+            label: DU session / batch
+            type: string
+          - name: profession
+            label: Current profession
+            type: string
+          - name: bio
+            label: Short bio
+            type: text
+
+  - name: members
+    label: Members Directory
+    type: file
+    path: _data/members.yml
+    fields:
+      - name: members
+        label: Members
+        type: object
+        list: true
+        fields:
+          - name: name
+            label: Name
+            type: string
+            required: true
+          - name: photo
+            label: Photo
+            type: image
+          - name: department
+            label: DU department
+            type: string
+          - name: session
+            label: DU session / batch
+            type: string
+          - name: hall
+            label: DU hall
+            type: string
+          - name: city
+            label: City in Michigan
+            type: string
+          - name: profession
+            label: Profession
+            type: string
+
+  - name: gallery
+    label: Gallery
+    type: file
+    path: _data/gallery.yml
+    fields:
+      - name: albums
+        label: Albums
+        type: object
+        list: true
+        fields:
+          - name: title
+            label: Album title
+            type: string
+            required: true
+          - name: date
+            label: Date
+            type: date
+          - name: description
+            label: Description
+            type: text
+          - name: photos
+            label: Photos
+            type: object
+            list: true
+            fields:
+              - name: image
+                label: Photo
+                type: image
+                required: true
+              - name: caption
+                label: Caption
+                type: string
+
+  - name: settings
+    label: Site Settings
+    type: file
+    path: _data/settings.yml
+    fields:
+      - name: tagline
+        label: Homepage headline
+        type: string
+      - name: intro
+        label: Homepage introduction
+        type: text
+      - name: hero_image
+        label: Homepage background photo (optional)
+        type: image
+      - name: email
+        label: Contact email
+        type: string
+      - name: phone
+        label: Contact phone
+        type: string
+      - name: facebook
+        label: Facebook page URL
+        type: string
+      - name: membership_form_endpoint
+        label: Membership form endpoint (Formspree URL)
+        type: string
+        description: "e.g. https://formspree.io/f/abcdwxyz — submissions are emailed to you."
+      - name: membership_fee
+        label: Membership fee note
+        type: string
+      - name: membership_note
+        label: Membership page introduction
+        type: text

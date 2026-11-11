@@ -1,0 +1,27 @@
+---
+layout: page
+title: Members
+eyebrow: Our community
+lead: Dhaka University graduates who are part of DUAA Michigan.
+permalink: /members/
+---
+{% assign members = site.data.members.members | sort: "name" %}
+{% if members and members.size > 0 %}
+  <div class="directory-tools">
+    <label class="visually-hidden" for="member-search">Search members</label>
+    <input id="member-search" type="search" placeholder="Search by name, department, session, hall or city" data-member-search>
+    <span class="muted" data-member-count>{{ members.size }} member{% if members.size != 1 %}s{% endif %}</span>
+  </div>
+  <div class="people-grid" data-member-grid>
+    {% for person in members %}
+      {% include person-card.html person=person %}
+    {% endfor %}
+  </div>
+  <p class="empty" hidden data-member-empty>No members match your search.</p>
+{% else %}
+  <div class="empty-state">
+    <h2>Our directory is just getting started.</h2>
+    <p>Members who opt in to the directory will be listed here.</p>
+    <a class="btn btn-gold" href="{{ '/membership/' | relative_url }}">Become a Member</a>
+  </div>
+{% endif %}

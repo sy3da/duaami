@@ -1,0 +1,49 @@
+title: Dhaka University Alumni Association of Michigan
+short_title: DUAA Michigan
+description: >-
+  The Michigan chapter of the Dhaka University Alumni Association — bringing
+  together graduates of the University of Dhaka living across Michigan.
+url: https://duaami.com
+baseurl: ""
+lang: en
+
+permalink: /news/:year/:month/:title/
+future: true
+
+collections:
+  events:
+    output: true
+    permalink: /events/:title/
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+  - scope:
+      path: ""
+      type: events
+    values:
+      layout: event
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: default
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+feed:
+  path: news/feed.xml
+
+exclude:
+  - .pages.yml
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor
+  - .bundle

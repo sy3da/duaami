@@ -1,0 +1,37 @@
+---
+layout: default
+---
+{% include page-header.html title=page.title eyebrow="Event" lead=page.summary %}
+<section class="section">
+  <div class="container narrow">
+    <div class="event-meta-box">
+      <div>
+        <span class="label">Date</span>
+        <strong>
+          {{ page.date | date: "%A, %B %-d, %Y" }}
+          {% if page.end_date and page.end_date != "" %} – {{ page.end_date | date: "%A, %B %-d, %Y" }}{% endif %}
+        </strong>
+      </div>
+      {% if page.time and page.time != "" %}
+      <div>
+        <span class="label">Time</span>
+        <strong>{{ page.time }}</strong>
+      </div>
+      {% endif %}
+      <div>
+        <span class="label">Location</span>
+        <strong>{{ page.location }}</strong>
+      </div>
+      {% if page.rsvp_url and page.rsvp_url != "" %}
+        <a class="btn btn-gold" href="{{ page.rsvp_url }}" target="_blank" rel="noopener">RSVP</a>
+      {% endif %}
+    </div>
+    <article class="prose">
+      {% if page.image and page.image != "" %}
+        <img class="cover" src="{{ page.image | relative_url }}" alt="">
+      {% endif %}
+      {{ content }}
+      <p class="back-link"><a href="{{ '/events/' | relative_url }}">&larr; All events</a></p>
+    </article>
+  </div>
+</section>

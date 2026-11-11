@@ -1,0 +1,40 @@
+{% assign settings = site.data.settings %}
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="topbar">
+  <div class="container topbar-inner">
+    <div class="topbar-contact">
+      {% if settings.email and settings.email != "" %}<a href="mailto:{{ settings.email }}">{{ settings.email }}</a>{% endif %}
+      {% if settings.phone and settings.phone != "" %}<a href="tel:{{ settings.phone | remove: ' ' | remove: '-' }}">{{ settings.phone }}</a>{% endif %}
+    </div>
+    <div class="topbar-bn" lang="bn">ঢাকা বিশ্ববিদ্যালয় অ্যালামনাই অ্যাসোসিয়েশন, মিশিগান</div>
+  </div>
+</div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="{{ '/' | relative_url }}">
+      <img src="{{ '/assets/images/logo-256.jpg' | relative_url }}" alt="" width="52" height="50">
+      <span class="brand-text">
+        <span class="brand-title">DUAA Michigan</span>
+        <span class="brand-sub">Dhaka University Alumni Association</span>
+      </span>
+    </a>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="site-nav" class="site-nav">
+      {% assign nav = "Home|/,Events|/events/,News|/news/,Gallery|/gallery/,Board|/board/,Members|/members/" | split: "," %}
+      {% for item in nav %}
+        {% assign parts = item | split: "|" %}
+        {% assign href = parts[1] %}
+        {% if href == "/" %}
+          {% if page.url == "/" %}{% assign active = true %}{% else %}{% assign active = false %}{% endif %}
+        {% else %}
+          {% assign prefix = page.url | slice: 0, href.size %}
+          {% if prefix == href %}{% assign active = true %}{% else %}{% assign active = false %}{% endif %}
+        {% endif %}
+        <a href="{{ href | relative_url }}"{% if active %} class="active" aria-current="page"{% endif %}>{{ parts[0] }}</a>
+      {% endfor %}
+      <a class="btn btn-gold nav-cta" href="{{ '/membership/' | relative_url }}">Become a Member</a>
+    </nav>
+  </div>
+</header>

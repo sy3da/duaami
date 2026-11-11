@@ -1,0 +1,17 @@
+---
+layout: page
+title: Board Members
+eyebrow: Leadership
+lead: The volunteers guiding DUAA Michigan.
+permalink: /board/
+---
+{% assign board = site.data.board.members %}
+{% if board and board.size > 0 %}
+  <div class="people-grid">
+    {% for person in board %}
+      {% include person-card.html person=person %}
+    {% endfor %}
+  </div>
+{% else %}
+  <p class="empty">Board members will be announced soon.</p>
+{% endif %}

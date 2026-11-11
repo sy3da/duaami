@@ -1,0 +1,20 @@
+{% assign p = include.person %}
+{% capture search %}{{ p.name }} {{ p.role }} {{ p.department }} {{ p.session }} {{ p.hall }} {{ p.city }} {{ p.profession }}{% endcapture %}
+<article class="card person-card" data-search="{{ search | downcase | escape }}">
+  <div class="avatar">
+    {% if p.photo and p.photo != "" %}
+      <img src="{{ p.photo | relative_url }}" alt="{{ p.name }}" loading="lazy">
+    {% else %}
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-4.42 0-8 2.24-8 5v1h16v-1c0-2.76-3.58-5-8-5Z"/></svg>
+    {% endif %}
+  </div>
+  <h3>{{ p.name }}</h3>
+  {% if p.role and p.role != "" %}<p class="role">{{ p.role }}</p>{% endif %}
+  <ul class="person-details">
+    {% if p.department and p.department != "" %}<li>{{ p.department }}{% if p.session and p.session != "" %}, {{ p.session }}{% endif %}</li>{% elsif p.session and p.session != "" %}<li>Session {{ p.session }}</li>{% endif %}
+    {% if p.hall and p.hall != "" %}<li>{{ p.hall }}</li>{% endif %}
+    {% if p.profession and p.profession != "" %}<li>{{ p.profession }}</li>{% endif %}
+    {% if p.city and p.city != "" %}<li>{{ p.city }}, MI</li>{% endif %}
+  </ul>
+  {% if p.bio and p.bio != "" %}<p class="bio">{{ p.bio }}</p>{% endif %}
+</article>
